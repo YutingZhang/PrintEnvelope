@@ -15,6 +15,12 @@
       max-width: 800px;
       margin: 0 auto;
     }
+    .title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
     .envelope {
       width: 9.5in;
       height: 4.125in;
@@ -41,6 +47,20 @@
       font-weight: 500;
       letter-spacing: 0.02em;
       white-space: pre-line;
+    }
+    .remark {
+      position: absolute;
+      bottom: 0.5in;
+      right: 0.5in;
+      font-size: 10pt;
+      font-style: italic;
+      color: gray;
+    }
+    .copyright {
+      text-align: center;
+      font-size: 12px;
+      margin-top: 20px;
+      color: gray;
     }
     .form-group {
       margin-bottom: 20px;
@@ -73,6 +93,7 @@
 </head>
 <body>
   <div class="container">
+    <div class="title">#10 Envelope Printing</div>
     <div class="form-group">
       <label for="senderInput">Sender's Address:</label>
       <textarea id="senderInput" placeholder="Enter sender's address..."></textarea>
@@ -82,6 +103,10 @@
       <textarea id="receiverInput" placeholder="Enter receiver's address..."></textarea>
     </div>
     <div class="form-group">
+      <label for="remarkInput">Remark:</label>
+      <textarea id="remarkInput" placeholder="Enter any remarks..."></textarea>
+    </div>
+    <div class="form-group">
       <button onclick="printEnvelope()">Print</button>
     </div>
 
@@ -89,17 +114,21 @@
       <div class="sender-address" id="senderAddress">Sender Name
       Sender Street Address
       City, NA 12345</div>
-      <div class="receiver-address" id="receiverAddress">Reciever Name
-      Reciver Street Address
+      <div class="receiver-address" id="receiverAddress">Receiver Name
+      Receiver Street Address
       City, NA 12345</div>
+      <div class="remark" id="remark"> </div>
     </div>
+    <div class="copyright">Authored by Yuting Zhang. Github: <a href="https://github.com/YutingZhang/PrintEnvelope">https://github.com/YutingZhang/PrintEnvelope</a></div>
   </div>
 
   <script>
     const senderInput = document.getElementById('senderInput');
     const receiverInput = document.getElementById('receiverInput');
+    const remarkInput = document.getElementById('remarkInput');
     const senderAddress = document.getElementById('senderAddress');
     const receiverAddress = document.getElementById('receiverAddress');
+    const remark = document.getElementById('remark');
 
     senderInput.addEventListener('input', () => {
       senderAddress.innerText = senderInput.value;
@@ -107,6 +136,10 @@
 
     receiverInput.addEventListener('input', () => {
       receiverAddress.innerText = receiverInput.value;
+    });
+
+    remarkInput.addEventListener('input', () => {
+      remark.innerText = remarkInput.value;
     });
 
     function printEnvelope() {
@@ -153,12 +186,20 @@
               letter-spacing: 0.1em;
               white-space: pre-line;
             }
+            .remark {
+              position: absolute;
+              bottom: 0.5in;
+              right: 0.5in;
+              font-size: 10pt;
+              font-style: italic;
+            }
           </style>
         </head>
         <body>
           <div class="envelope">
             <div class="sender-address">${senderAddress.innerText.replace(/\n/g, '<br>')}</div>
             <div class="receiver-address">${receiverAddress.innerText.replace(/\n/g, '<br>')}</div>
+            <div class="remark">${remark.innerText}</div>
           </div>
         </body>
         </html>
